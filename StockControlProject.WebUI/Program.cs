@@ -7,7 +7,7 @@ namespace StockControlProject.WebUI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation(); // Runtime de compile etme --> manage nuget packages runtimecompilation
 
             var app = builder.Build();
 
@@ -25,6 +25,12 @@ namespace StockControlProject.WebUI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.MapControllerRoute(
+               name: "areas",
+               pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+            //app.MapAreaControllerRoute
 
             app.MapControllerRoute(
                 name: "default",
