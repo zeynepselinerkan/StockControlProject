@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "AddProduct";
+}
+
+@model Product
+<div class="animated fadeIn">
+
+    <div class="row">
+        <div class="offset-3 col-lg-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <strong class="card-title">Add Product</strong>
+                </div>
+                <div class="card-body">
+                    <!-- Category -->
+                    <div id="pay-invoice">
+                        <div class="card-body">
+                            <hr>
+                            <form asp-area="Admin" asp-action="AddProduct" asp-controller="Product" method="post" novalidate="novalidate">
+
+                                <div class="form-group">
+                                    <label asp-for="ProductName" class="control-label mb-1">Product Name</label>
+                                    <input asp-for="ProductName" type="text" data-val-required="Please enter a product name." class="form-control" aria-required="true" aria-invalid="false">
+                                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="UnitPrice" class="control-label mb-1">Unit Price</label>
+                                    <input asp-for="UnitPrice" type="text" data-val-required="Please enter a unit price for the product."class="form-control" aria-required="true" aria-invalid="false">
+                                    <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="ExpireDate" class="control-label mb-1">Expire Date</label>
+                                    <input asp-for="ExpireDate" type="date" data-val-required="Please choose an expire date." class="form-control" aria-required="true" aria-invalid="false">
+                                    <span asp-validation-for="ExpireDate" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Stock" class="control-label mb-1">Stock</label>
+                                    <input asp-for="Stock" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the stock quantity." aria-required="true" aria-invalid="false" aria-describedby="cc-name">
+                                    <span asp-validation-for="Stock" class="text-danger"></span>
+                                    <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <label asp-for="CategoryId" class="control-label mb-1">Category</label>
+
+                                    <select asp-for="CategoryId" asp-items="@ViewBag.ActiveCategories" class="form-control cc-name valid" data-val="true" data-val-required="Please choose the category." aria-required="true" aria-invalid="false" aria-describedby="cc-name">
+                                        <option>Choose Category</option>
+
+                                    </select>
+                                    <span asp-validation-for="Stock" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="SupplierId" class="control-label mb-1">Supplier</label>
+
+                                    <select asp-for="SupplierId" asp-items="@ViewBag.ActiveSuppliers" class="form-control cc-name valid" data-val="true" data-val-required="Please choose the supplier." aria-required="true" aria-invalid="false" aria-describedby="cc-name">
+                                        <option>Choose Supplier</option>
+
+                                    </select>
+                                    <span asp-validation-for="Stock" class="text-danger"></span>
+                                </div>
+
+
+
+
+
+
+
+                                <div>
+                                    <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                        <i class="fa fa-plus fa-lg"></i>&nbsp;
+                                        <span id="payment-button-amount">Add</span>
+                                        <span id="payment-button-sending" style="display:none;">Adding…</span>
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div> <!-- .card -->
+
+        </div><!--/.col-->
+    </div>
+</div><!-- .animated -->
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}
