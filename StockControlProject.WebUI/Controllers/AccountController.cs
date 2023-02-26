@@ -22,7 +22,7 @@ namespace StockControlProject.WebUI.Controllers
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync($"{uri}/api/User/Login?email={dto.Email}&parola={dto.Password}"))
+                using (var response = await httpClient.GetAsync($"{uri}/api/User/Login?email={dto.Email}&password={dto.Password}"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
 

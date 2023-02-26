@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StockControlProject.WebUI.Areas.Admin.Controllers
 {
+    [Area("Admin"), Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
-        [Area("Admin"), Authorize]
         public IActionResult Index()
         {
             return View();

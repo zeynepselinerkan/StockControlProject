@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StockControlProject.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin"), Authorize]
+    [Area("Admin"), Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         string uri = "https://localhost:7182";

@@ -5,7 +5,7 @@ using StockControlProject.Domain.Entities;
 
 namespace StockControlProject.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin"), Authorize]
+    [Area("Admin"), Authorize(Roles = "Admin")]
     public class OrderController : Controller
     {
         string uri = "https://localhost:7182";
