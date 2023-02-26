@@ -79,6 +79,16 @@ namespace StockControlProject.Repository.Concrete
             }
             return query;
         }
+
+        public IQueryable<T> GetAll(Expression<Func<T, bool>> exp, params Expression<Func<T, object>>[] includes)
+        {
+            var query = _context.Set<T>().Where(exp);
+            if (includes != null)
+            {
+                query = includes.Aggregate(query, (current, include) => current.Include(include));
+            }
+            return query;
+        }
         public T GetByDefault(Expression<Func<T, bool>> exp) => _context.Set<T>().FirstOrDefault(exp); //LINQ Exp gelecek. Bizim sorgumuz yani.
         public T GetById(int id) => _context.Set<T>().Find(id); // Find methodu pk'ler ile çalışır.
         public IQueryable<T> GetById(int id, params Expression<Func<T, object>>[] includes)

@@ -40,6 +40,13 @@ namespace StockControlProject.API.Controllers
         {
             return Ok(_orderService.GetById(id,t0 => t0.OrderDetails, t1 => t1.User));
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetOrderDetailById(int id)
+        {
+            return Ok(_orderDetailsService.GetAll(x=> x.OrderId==id, t1 => t1.Product));
+        }
+
         [HttpGet]
         public IActionResult GetPendingOrders(Order order)
         {

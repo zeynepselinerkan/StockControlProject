@@ -3,12 +3,20 @@ using Newtonsoft.Json;
 using StockControlProject.Domain.Entities;
 using System.Text;
 using System;
+using StockControlProject.WebUI.Models;
+using Microsoft.AspNetCore.Authorization;
+using StockControlProject.Domain.Enums;
 
 namespace StockControlProject.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize(Roles="Admin")]
     public class UserController : Controller
     {
+        private readonly IWebHostEnvironment _environment;
+        public UserController(IWebHostEnvironment environment)
+        {
+            _environment = environment;
+        }
         string uri = "https://localhost:7182";
         public async Task<IActionResult> Index()
         {
@@ -52,11 +60,27 @@ namespace StockControlProject.WebUI.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult AddUser() { return View(); }
+        public IActionResult AddUser() 
+        { 
+            return View(); 
+        }
+
         [HttpPost]
-        public async Task<IActionResult> AddUser(User user)
+        public async Task<IActionResult> AddUser(User user,List<IFormFile> files)
         {
             user.IsActive = true;
+            user.Password = "1234Aa.*";
+            string returnedMessage = Upload.ImageUpload(files,_environment,out bool imgResult);
+
+            if (imgResult)
+            {
+                user.PhotoURL = returnedMessage;
+            }
+            else
+            {
+                ViewBag.Message = returnedMessage;
+                return View();
+            }
 
             using (var httpClient = new HttpClient())
             {
@@ -69,9 +93,11 @@ namespace StockControlProject.WebUI.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
         static User updatedUser;
+
         [HttpGet]
-        public async Task<IActionResult> UpdateUser(int id) // id ile ilgili userı bul ve viewda göster.
+        public async Task<IActionResult> UpdateUser(int id) // id ile ilgili userı bul ve viewda göster. Seçilen kullanıcıyı bulma
         {
             using (var httpClient = new HttpClient())
             {
@@ -84,13 +110,31 @@ namespace StockControlProject.WebUI.Areas.Admin.Controllers
             return View(updatedUser);  // İlgili nesne ile ilgili güncelleme View'ını göstercek.
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateUser(User userUp)
+        public async Task<IActionResult> UpdateUser(User userUp,List<IFormFile> files) 
         {
+            if (files.Count==0) // Güncelleme sırasında foto yüklenmez ise
+            {
+                userUp.PhotoURL = updatedUser.PhotoURL;
+            }
+            else
+            {
+                string returnedMessage = Upload.ImageUpload(files, _environment, out bool imgResult);
 
+                if (imgResult)
+                {
+                    userUp.PhotoURL = returnedMessage;
+                }
+                else
+                {
+                    ViewBag.Message = returnedMessage;
+                    return View();
+                }
+            }
             using (var httpClient = new HttpClient())
             {
                 userUp.AddedDate = updatedUser.AddedDate;
                 userUp.IsActive = true; // İstemiyorsak =updatedUser.IsActive; yazarım. Hiç yazmazsam defaultu getirir. Tarihte falan sorun yaşarım.
+                userUp.Password = updatedUser.Password;
 
                 StringContent content = new StringContent(JsonConvert.SerializeObject(userUp), Encoding.UTF8, "application/json");
 

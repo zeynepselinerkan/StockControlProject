@@ -21,6 +21,11 @@ namespace StockControlProject.API.Controllers
         {
             return Ok(_service.GetAll(t0 => t0.Category,t1=>t1.Supplier));
         }
+        [HttpGet("{id}")]
+        public IActionResult GetSuppliersProducts(int id)
+        {
+            return Ok(_service.GetAll(x=>x.SupplierId==id,t0 => t0.Category, t1 => t1.Supplier));
+        }
         [HttpGet]
         public IActionResult GetActiveProducts()
         {

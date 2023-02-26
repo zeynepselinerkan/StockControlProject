@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@*template/tables-data'dan content kısmını aldım.Renderbody orası.*@
+@model List<Order>
+
+<div class="animated fadeIn">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Supplier List</strong>
+                </div>
+                <div class="card-body">
+                    <table id="bootstrap-data-table" class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Order Date</th>
+                                <th>Customer</th>
+                                <th>Total Amount</th>
+                                <th>Order Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Order item in Model)
+                            {
+                                @if (item.Status == Status.Pending)
+                                {
+                                    <tr>
+                                        <td>@item.AddedDate</td>
+                                        <td>@item.User.FirstName @item.User.LastName</td>
+                                        <td>
+                                            @{
+                                                decimal totalAmount = 0;
+                                                foreach (OrderDetails detail in item.OrderDetails)
+                                                {
+                                                    totalAmount += (detail.Quantity * detail.UnitPrice);
+                                                }
+                                                <span>@totalAmount.ToString("C2")</span>
+                                            }
+                                        </td>
+                                        <td class="bg-warning text-white">
+                                            <span>Pending</span>
+                                        </td>
+
+                                        <td>
+                                            <a asp-area="Admin" asp-controller="Order" asp-action="OrderDetails" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-edit"></i>&nbsp;Order Details
+                                            </a>
+                                            <a asp-area="Admin" asp-controller="Order" asp-action="ConfirmOrder" asp-route-id="@item.Id" class="btn btn-success btn-sm">
+                                                <i class="fa fa-check-square-o"></i>&nbsp;Confirm
+                                            </a>
+                                            <a asp-area="Admin" asp-controller="Order" asp-action="RejectOrder" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash-o"></i>&nbsp;Reject
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                                else if (item.Status == Status.Confirmed)
+                                {
+                                    <tr>
+                                        <td>@item.AddedDate</td>
+                                        <td>@item.User.FirstName @item.User.LastName</td>
+                                        <td>
+                                            @{
+                                                decimal totalAmount = 0;
+                                                foreach (OrderDetails detail in item.OrderDetails)
+                                                {
+                                                    totalAmount += (detail.Quantity * detail.UnitPrice);
+                                                }
+                                                <span>@totalAmount.ToString("C2")</span>
+                                            }
+                                        </td>
+                                        <td class="bg-success text-white">
+                                            <span>Confirmed</span>
+                                        </td>
+
+                                        <td>
+                                            <a asp-area="Admin" asp-controller="Order" asp-action="OrderDetails" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-edit"></i>&nbsp;Order Details
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                }
+                                else if (item.Status == Status.Cancelled)
+                                {
+                                    <tr>
+                                        <td>@item.AddedDate</td>
+                                        <td>@item.User.FirstName @item.User.LastName</td>
+                                        <td>
+                                            @{
+                                                decimal totalAmount = 0;
+                                                foreach (OrderDetails detail in item.OrderDetails)
+                                                {
+                                                    totalAmount += (detail.Quantity * detail.UnitPrice);
+                                                }
+                                                <span>@totalAmount.ToString("C2")</span>
+                                            }
+                                        </td>
+                                        <td class="bg-success text-white">
+                                            <span>Rejected</span>
+                                        </td>
+
+                                        <td>
+                                            <a asp-area="Admin" asp-controller="Order" asp-action="OrderDetails" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-edit"></i>&nbsp;Order Details
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- .animated -->
+@section Css {
+    <link rel="stylesheet" href="~/template/assets/css/lib/datatable/dataTables.bootstrap.min.css">
+}
+
+@section Scripts {
+
+
+    <script src="~/template/assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="~/template/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="~/template/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="~/template/assets/js/init/datatables-init.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#bootstrap-data-table-export').DataTable();
+        });
+    </script>
+
+}

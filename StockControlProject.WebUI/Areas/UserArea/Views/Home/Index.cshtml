@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+@model List<Product>
+
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">All Products</strong>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Unit Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (Product item in Model)
+                            {
+                                <tr>
+
+                                    <td>@item.ProductName</td>
+                                    <td>@item.Stock</td>
+                                    <td>@item.UnitPrice</td>
+                                    <td>
+                                        <a asp-area="UserArea" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.Id" class="btn btn-success btn-sm" data-method="post">
+                                            <i class="fa fa-cart-plus"></i>&nbsp;Add to Cart
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

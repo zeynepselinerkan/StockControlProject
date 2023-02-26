@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -23,6 +24,7 @@ namespace StockControlProject.Service.Abstract
         List<T> GetDefault(Expression<Func<T, bool>> exp);
         List<T> GetAll();
         IQueryable<T> GetAll(params Expression<Func<T, object>>[] includes);
+        IQueryable<T> GetAll(Expression<Func<T, bool>> exp, params Expression<Func<T, object>>[] includes);
         bool Activate(int id);
         bool Any(Expression<Func<T, bool>> exp); 
 

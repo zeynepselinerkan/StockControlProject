@@ -54,6 +54,10 @@ namespace StockControlProject.Service.Concrete
         {
             return _repository.GetAll(includes);
         }
+        public IQueryable<T> GetAll(Expression<Func<T, bool>> exp, params Expression<Func<T, object>>[] includes)
+        {
+            return _repository.GetAll(exp, includes);
+        }
         public T GetByDefault(Expression<Func<T, bool>> exp)
         {
             return _repository.GetByDefault(exp);

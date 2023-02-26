@@ -26,6 +26,7 @@ namespace StockControlProject.Repository.Abstract
         List<T> GetDefault(Expression<Func<T, bool>> exp);// Where ile liste döndürecek.
         List<T> GetAll();
         IQueryable<T> GetAll(params Expression<Func<T, object>>[] includes); // İlişkililerin de tümünü getirsin.
+        IQueryable<T> GetAll(Expression<Func<T, bool>> exp, params Expression<Func<T, object>>[] includes);
 
         bool Activate(int id); // Pasif nesneyi aktifleştirmek için.
         bool Any(Expression<Func<T, bool>> exp); // Şu tarih aralığında ürün var mı gibi filtre

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StockControlProject.Repository.Context;
 
@@ -11,9 +12,10 @@ using StockControlProject.Repository.Context;
 namespace StockControlProject.Repository.Migrations
 {
     [DbContext(typeof(StockControlContext))]
-    partial class StockControlContextModelSnapshot : ModelSnapshot
+    [Migration("20230226202829_uploadSupplierId")]
+    partial class uploadSupplierId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

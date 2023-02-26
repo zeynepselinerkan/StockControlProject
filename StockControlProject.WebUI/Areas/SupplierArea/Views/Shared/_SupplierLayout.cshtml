@@ -86,49 +86,17 @@
                 <ul class="nav navbar-nav">
 
                     <li class="active">
-                        <a asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="menu-icon fa fa-laptop"></i>Main Page </a>
+                        <a asp-area="SupplierArea" asp-controller="Home" asp-action="Index"><i class="menu-icon fa fa-laptop"></i>Main Page </a>
                     </li>
                     <li class="menu-title">Operations</li><!-- /.menu-title -->
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Category Operations</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a></li>
-                            <li><i class="fa fa-id-badge"></i><a asp-area="Admin" asp-controller="Category" asp-action="AddCategory">Add Category</a></li>
-                        </ul>
-                    </li>
 
                      <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Product Operations</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a></li>
-                            <li><i class="fa fa-id-badge"></i><a asp-area="Admin" asp-controller="Product" asp-action="AddProduct">Add Product</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a asp-area="SupplierArea" asp-controller="Product" asp-action="Index">Products</a></li>
+                            <li><i class="fa fa-id-badge"></i><a asp-area="SupplierArea" asp-controller="Product" asp-action="AddProduct">Add Product</a></li>
                         </ul>
                     </li>
-
-                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Order Operations</a>
-                       <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a asp-area="Admin" asp-controller="Order" asp-action="Index">Orders</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Supplier Operations</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a asp-area="Admin" asp-controller="Supplier" asp-action="Index">Suppliers</a></li>
-                            <li><i class="fa fa-id-badge"></i><a asp-area="Admin" asp-controller="Supplier" asp-action="AddSupplier">Add Supplier</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>User Operations</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a asp-area="Admin" asp-controller="User" asp-action="Index">Users</a></li>
-                            <li><i class="fa fa-id-badge"></i><a asp-area="Admin" asp-controller="User" asp-action="AddUser">Add User</a></li>
-                        </ul>
-                    </li>
-
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

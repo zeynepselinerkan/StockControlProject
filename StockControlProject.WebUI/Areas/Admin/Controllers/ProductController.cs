@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using StockControlProject.Domain.Entities;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace StockControlProject.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize]
     public class ProductController : Controller
     {
         string uri = "https://localhost:7182";
@@ -133,7 +134,7 @@ namespace StockControlProject.WebUI.Areas.Admin.Controllers
             using (var httpClient = new HttpClient())
             {
                 productUp.AddedDate = updatedProduct.AddedDate;
-                productUp.IsActive = updatedProduct.IsActive; // İstemiyorsak =updatedProduct.IsActive; yazarım. Hiç yazmazsam defaultu getirir. Tarihte falan sorun yaşarım.
+                productUp.IsActive = updatedProduct.IsActive; // Hiç yazmazsam defaultu getirir. Tarihte falan sorun yaşarım.
 
                 StringContent content = new StringContent(JsonConvert.SerializeObject(productUp), Encoding.UTF8, "application/json");
 

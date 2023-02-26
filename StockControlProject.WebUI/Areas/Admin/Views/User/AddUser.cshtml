@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "AddUser";
+}
+
+@model User
+<div class="animated fadeIn">
+
+    <div class="row">
+        <div class="offset-3 col-lg-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <strong class="card-title">Add User</strong>
+                </div>
+                <div class="card-body">
+                    <!-- User -->
+                    <div id="pay-invoice">
+                        <div class="card-body">
+                            <hr>
+                            <form asp-area="Admin" asp-action="AddUser" asp-controller="User" method="post" novalidate="novalidate" enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <label asp-for="PhotoURL" class="control-label mb-1">Photo</label>
+                                    <input asp-for="PhotoURL" type="file" name="files" data-val-required="Please choose your photo." class="form-control" aria-required="true" aria-invalid="false">
+                                    <span asp-validation-for="PhotoURL" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="FirstName" class="control-label mb-1">First Name</label>
+                                    <input asp-for="FirstName" type="text" data-val-required="Please enter the name." class="form-control" aria-required="true" aria-invalid="false">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="LastName" class="control-label mb-1">Last Name</label>
+                                    <input asp-for="LastName" type="text" data-val-required="Please enter the last name." class="form-control" aria-required="true" aria-invalid="false">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label mb-1">Email</label>
+                                    <input asp-for="Email" type="text" data-val-required="Please enter the email." class="form-control" aria-required="true" aria-invalid="false">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Phone" class="control-label mb-1">Phone</label>
+                                    <input asp-for="Phone" type="text" data-val-required="Please enter the address." class="form-control" aria-required="true" aria-invalid="false">
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Address" class="control-label mb-1">Address</label>
+                                    <input asp-for="Address" type="text" data-val-required="Please choose role." class="form-control" aria-required="true" aria-invalid="false">
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Role" class="control-label mb-1">Role</label>
+
+                                    <select asp-for="Role" asp-items="@Html.GetEnumSelectList(typeof(UserRole))" class="form-control cc-name valid" data-val="true" data-val-required="Please choose the role." aria-required="true" aria-invalid="false" aria-describedby="cc-name">
+                                        <option>Choose Role</option>
+                                    </select>
+                                    <span asp-validation-for="Role" class="text-danger"></span>                      
+                                </div>
+        
+                                <div>
+                                    <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                        <i class="fa fa-plus fa-lg"></i>&nbsp;
+                                        <span id="payment-button-amount">Add</span>
+                                        <span id="payment-button-sending" style="display:none;">Adding…</span>
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div> <!-- .card -->
+
+        </div><!--/.col-->
+    </div>
+</div><!-- .animated -->
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}

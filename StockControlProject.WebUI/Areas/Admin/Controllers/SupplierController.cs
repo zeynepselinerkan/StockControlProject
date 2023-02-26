@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using StockControlProject.Domain.Entities;
 using System.Text;
 
 namespace StockControlProject.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize(Roles ="Admin")]
     public class SupplierController : Controller
     {
         string uri = "https://localhost:7182";
